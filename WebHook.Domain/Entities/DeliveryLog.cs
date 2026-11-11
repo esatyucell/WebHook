@@ -13,6 +13,6 @@ namespace WebHook.Domain.Entities
         public int? StatusCode { get; set; }
         public string ErrorMessage { get; set; }
         public int AttemptNumber { get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
