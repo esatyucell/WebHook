@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="WebHook.Aplication/WebHook.Application.csproj" Id="8310fc90-cfd8-4e15-a06a-75944337b616" />
   <Project Path="WebHook.Domain/WebHook.Domain.csproj" />
 </Solution>
