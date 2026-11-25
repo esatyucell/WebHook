@@ -11,5 +11,9 @@ namespace WebHook.Domain.Interfaces
         Task<Subscription> GetByIdAsync(Guid id);
         Task<List<Subscription>> GetAllAsync();
         Task<Subscription> UpdateAsync(Subscription subscription);
+
+        Task<List<Subscription>> GetActiveByEventTypeAsync(string eventType);
+
+        Task<int> GetActiveCountAsync();
     }
 }

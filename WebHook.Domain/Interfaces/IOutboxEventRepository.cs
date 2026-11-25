@@ -9,5 +9,7 @@ namespace WebHook.Domain.Interfaces
     {
         Task<OutboxEvent> AddAsync(OutboxEvent outboxEvent);
         Task<List<OutboxEvent>> GetUnprocessedEventsAsync();
+        Task UpdateAsync(OutboxEvent outboxEvent);
+        Task<int> GetUnprocessedCountAsync();
     }
 }
