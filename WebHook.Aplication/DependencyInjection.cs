@@ -12,7 +12,9 @@ namespace WebHook.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<ISubscriptionService, SubscriptionService>();
+            services.AddScoped<IEventService, EventService>();
             return services;
+            
         }
     }
 }
