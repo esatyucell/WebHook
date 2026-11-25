@@ -31,3 +31,28 @@ Content-Type: application/json
 ### 5. Negatif Test: Olmayan ID Sorgulama (404 Not Found beklenir)
 GET {{baseUrl}}/api/subscriptions/11111111-1111-1111-1111-111111111111
 Accept: application/json
+
+### 6. Yeni Olay Yayınlama (202 Accepted beklenir)
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "eventType": "order.created",
+  "payload": {
+    "orderId": 1045,
+    "customerEmail": "musteri@ornek.com",
+    "totalAmount": 1250.50,
+    "currency": "TRY"
+  }
+}
+
+### 7. Negatif Test: Boş EventType Gönderimi (400 Bad Request beklenir)
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "eventType": "",
+  "payload": {
+    "orderId": 1045
+  }
+}
