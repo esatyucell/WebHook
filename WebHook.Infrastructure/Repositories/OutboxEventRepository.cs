@@ -18,10 +18,21 @@ namespace WebHook.Infrastructure.Repositories
             return outboxEvent;
         }
 
+        public async Task<int> GetUnprocessedCountAsync()
+        {
+            return await _context.OutboxEvents.CountAsync(x => x.ProcessedAt == null);
+        }
+
         public async Task<List<OutboxEvent>> GetUnprocessedEventsAsync()
         {
             return await _context.OutboxEvents.Where(x => x.ProcessedAt == null).OrderBy(x => x.CreatedAt).Take(50).ToListAsync();
             
+        }
+
+        public async Task UpdateAsync(OutboxEvent outboxEvent)
+        {
+            _context.OutboxEvents.Update(outboxEvent);
+            await _context.SaveChangesAsync();
         }
     }
 }

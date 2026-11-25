@@ -17,6 +17,16 @@ namespace WebHook.Infrastructure.Repositories
             return subscription;
         }
 
+        public async Task<List<Subscription>> GetActiveByEventTypeAsync(string eventType)
+        {
+            return await _context.Subscriptions.AsNoTracking().Where(x => x.Status && x.EventType == eventType).ToListAsync();
+        }
+
+        public async Task<int> GetActiveCountAsync()
+        {
+            return await _context.Subscriptions.CountAsync(x => x.Status);
+        }
+
         public async Task<List<Subscription>> GetAllAsync()
         {
             return await _context.Subscriptions.AsNoTracking().ToListAsync();
