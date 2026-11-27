@@ -11,5 +11,6 @@ namespace WebHook.Domain.Interfaces
         Task<List<OutboxEvent>> GetUnprocessedEventsAsync();
         Task UpdateAsync(OutboxEvent outboxEvent);
         Task<int> GetUnprocessedCountAsync();
+        Task<List<OutboxEvent>> GetByIdsAsync(IEnumerable<Guid> ids);
     }
 }

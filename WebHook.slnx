@@ -1,6 +1,15 @@
 <Solution>
+  <Folder Name="/Çözüm Öğeleri/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="webhook-ui/webhook-ui.esproj">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="WebHook.API/WebHook.API.csproj" Id="cdaa21fb-2b81-466d-b06e-8d0932b079a2" />
   <Project Path="WebHook.Aplication/WebHook.Application.csproj" Id="8310fc90-cfd8-4e15-a06a-75944337b616" />
   <Project Path="WebHook.Domain/WebHook.Domain.csproj" />
   <Project Path="WebHook.Infrastructure/WebHook.Infrastructure.csproj" Id="45a7ec7c-2ca9-4a49-a513-b72f97524c61" />
+  <Project Path="WebHook.Tests/WebHook.Tests.csproj" Id="cbd17c21-ef35-4b68-ac2e-e269d6a61397" />
+  <Project Path="WebHook.Worker/WebHook.Worker.csproj" Id="c900889e-ee3c-4761-b3d3-3c057fb20c7a" />
 </Solution>

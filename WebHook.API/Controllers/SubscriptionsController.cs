@@ -30,10 +30,11 @@ namespace WebHook.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var subscription = await _subscriptionService.GetByIdAsync(id);
-            if (subscription == null) {
+            if (subscription == null)
+            {
                 return NotFound();
             }
-           return Ok(subscription);
+            return Ok(subscription);
         }
 
         [HttpGet]
@@ -41,6 +42,18 @@ namespace WebHook.API.Controllers
         {
             var subscriptions = await _subscriptionService.GetAllAsync();
             return Ok(subscriptions);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var deleted = await _subscriptionService.DeleteAsync(id);
+            if (!deleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

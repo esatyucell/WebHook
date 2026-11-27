@@ -60,6 +60,20 @@ namespace WebHook.Application.Services
             return subscriptions.Select(s => s.ToResponseDto()).ToList();
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            var subscription = await _subscriptionRepository.GetByIdAsync(id);
+            if (subscription == null || !subscription.Status)
+            {
+                return false;
+            }
+
+            subscription.Status = false;
+            subscription.UpdatedAt = DateTime.UtcNow;
+            await _subscriptionRepository.UpdateAsync(subscription);
+            return true;
+        }
+
         private static string GenerateSecretKey()
         {
             var randomBytes = RandomNumberGenerator.GetBytes(32);

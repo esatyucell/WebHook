@@ -8,9 +8,12 @@ using WebHook.Domain.Interfaces;
 
 namespace WebHook.Application.Services
 {
-    public class EventService(IOutboxEventRepository outboxEventRepository) : IEventService
+    public class EventService(
+        IOutboxEventRepository outboxEventRepository,
+        IOutboxMessagePublisher messagePublisher) : IEventService
     {
         private readonly IOutboxEventRepository _outboxEventRepository = outboxEventRepository;
+        private readonly IOutboxMessagePublisher _messagePublisher = messagePublisher;
 
         public async Task<Guid> PublishAsync(EventPublishDto eventPublishDto)
         {
@@ -35,7 +38,11 @@ namespace WebHook.Application.Services
                 ProcessedAt = null
             };
 
+            // 1. Önce SQL Server Outbox tablosuna kalıcı olarak yaz (veri kaybı garantisi)
             await _outboxEventRepository.AddAsync(outboxEvent);
+
+            // 2. Worker'ı milisaniyeler içinde uyandırmak için RabbitMQ kuyruğuna haber ver
+            await _messagePublisher.PublishOutboxEventAsync(outboxEvent.Id);
 
             return outboxEvent.Id;
         }

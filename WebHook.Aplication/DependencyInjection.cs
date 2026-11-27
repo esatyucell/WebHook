@@ -13,6 +13,7 @@ namespace WebHook.Application
         {
             services.AddScoped<ISubscriptionService, SubscriptionService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IDeliveryLogService, DeliveryLogService>();
             return services;
             
         }

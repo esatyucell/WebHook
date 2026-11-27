@@ -34,5 +34,12 @@ namespace WebHook.Infrastructure.Repositories
             _context.OutboxEvents.Update(outboxEvent);
             await _context.SaveChangesAsync();
         }
+        public async Task<List<OutboxEvent>> GetByIdsAsync(IEnumerable<Guid> ids)
+        {
+            return await _context.OutboxEvents
+                .AsNoTracking()
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+        }
     }
 }

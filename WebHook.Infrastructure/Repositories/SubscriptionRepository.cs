@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebHook.Domain.Entities;
 using WebHook.Domain.Interfaces;
 using WebHook.Infrastructure.Data;
@@ -10,6 +12,7 @@ namespace WebHook.Infrastructure.Repositories
     public class SubscriptionRepository(AppDbContext context) : ISubscriptionRepository
     {
         private readonly AppDbContext _context = context;
+
         public async Task<Subscription> AddAsync(Subscription subscription)
         {
             await _context.Subscriptions.AddAsync(subscription);
@@ -19,7 +22,10 @@ namespace WebHook.Infrastructure.Repositories
 
         public async Task<List<Subscription>> GetActiveByEventTypeAsync(string eventType)
         {
-            return await _context.Subscriptions.AsNoTracking().Where(x => x.Status && x.EventType == eventType).ToListAsync();
+            return await _context.Subscriptions
+                .AsNoTracking()
+                .Where(x => x.Status && x.EventType == eventType)
+                .ToListAsync();
         }
 
         public async Task<int> GetActiveCountAsync()
@@ -29,19 +35,21 @@ namespace WebHook.Infrastructure.Repositories
 
         public async Task<List<Subscription>> GetAllAsync()
         {
-            return await _context.Subscriptions.AsNoTracking().ToListAsync();
-            
+            return await _context.Subscriptions
+                .AsNoTracking()
+                .Where(x => x.Status)
+                .OrderByDescending(x => x.CreatedAt)
+                .ToListAsync();
         }
 
         public async Task<Subscription> GetByIdAsync(Guid id)
         {
             return await _context.Subscriptions.FindAsync(id);
-            
         }
 
         public async Task<Subscription> UpdateAsync(Subscription subscription)
         {
-             _context.Subscriptions.Update(subscription);
+            _context.Subscriptions.Update(subscription);
             await _context.SaveChangesAsync();
             return subscription;
         }
