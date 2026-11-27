@@ -6,14 +6,6 @@
 
 ---
 
-## 🎥 Canlı Demo & Video İncelemesi
-
-Sistemin kurulumunu, asenkron olay akışını, RabbitMQ kuyruk yönetimini, Redis önbellekleme performansını ve React canlı izleme panelini çalışırken görmek için demo videomu izleyebilirsiniz:
-
-[![WebHook Engine Canlı Demo](https://img.shields.io/badge/YouTube-Canl%C4%B1%20Demo%20Videoyu%20%C4%B0zle-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)  
-*(Not: Yukarıdaki butona tıklayarak veya [buradaki YouTube bağlantısı](https://www.youtube.com/watch?v=dQw4w9WgXcQ) üzerinden sistemin canlı test ve çalışma senaryolarını izleyebilirsiniz. Kendi video linkinizi buraya ekleyebilirsiniz.)*
-
----
 
 ## ✨ Temel Özellikler ve Mühendislik Kararları
 
